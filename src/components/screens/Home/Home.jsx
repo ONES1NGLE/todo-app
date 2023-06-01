@@ -31,13 +31,16 @@ const Home = () => {
   };
 
   const removeTodo = (id) => {
-    setTodos([...todos].filter((t) => t._id !== id));
+    // возвращаем все туду todo.filter(если id todo равна id, которое хотим удалить, тогда нам НЕ нужно возращать эту туду)
+    const newTodos = todos.filter((todo) => todo._id !== id);
+    setTodos(newTodos);
+    // setTodos([...todos].filter((t) => t._id !== id));
   };
 
   const addTodo = (title) => {
     setTodos((prev) => [
       {
-        _id: new Date(),
+        _id: new Date() + todos.length,
         title,
         isCompleted: false,
       },
