@@ -1,18 +1,11 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-const CreateTodoField = ({ setTodos }) => {
-  const [title, setTitle] = useState("");
+const CreateTodoField = ({ addTodo }) => {
+  const [title, setTitle] = useState('');
 
-  const addTodo = (title) => {
-    setTodos((prev) => [
-      {
-        _id: new Date(),
-        title,
-        isCompleted: false,
-      },
-      ...prev,
-    ]);
-    setTitle("");
+  const onAddTodo = (title) => {
+    addTodo(title);
+    setTitle('');
   };
 
   return (
@@ -21,7 +14,7 @@ const CreateTodoField = ({ setTodos }) => {
         type="text"
         onChange={(e) => setTitle(e.target.value)}
         value={title}
-        onKeyPress={(e) => e.key === "Enter" && addTodo(title)}
+        onKeyDown={(e) => e.key === 'Enter' && onAddTodo(title)}
         className="bg-transparent w-full border-none outline-none"
         placeholder="Add a task"
       />

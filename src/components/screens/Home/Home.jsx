@@ -25,13 +25,24 @@ const Home = () => {
 
   const changeTodo = (id) => {
     const copy = [...todos];
-    const current = copy.find((t) => t._id === id);
+    const current = copy.find((todoItem) => todoItem._id === id);
     current.isCompleted = !current.isCompleted;
     setTodos(copy);
   };
 
   const removeTodo = (id) => {
     setTodos([...todos].filter((t) => t._id !== id));
+  };
+
+  const addTodo = (title) => {
+    setTodos((prev) => [
+      {
+        _id: new Date(),
+        title,
+        isCompleted: false,
+      },
+      ...prev,
+    ]);
   };
 
   return (
@@ -47,7 +58,7 @@ const Home = () => {
           removeTodo={removeTodo}
         />
       ))}
-      <CreateTodoField setTodos={setTodos} />
+      <CreateTodoField addTodo={addTodo} />
     </div>
   );
 };
